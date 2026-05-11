@@ -17,10 +17,11 @@
     "--spark-event-logs-path" : "s3://aws-glue-assets-731732765556-ap-south-1/sparkHistoryLogs/",
     "--enable-job-insights" : "true",
     "--enable-observability-metrics" : "true",
-    "--conf" : "spark.eventLog.rolling.enabled=true",
+    "--conf" : "spark.eventLog.rolling.enabled=true --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog",
     "--enable-glue-datacatalog" : "true",
     "--enable-continuous-cloudwatch-log" : "true",
     "--job-bookmark-option" : "job-bookmark-disable",
+    "--datalake-formats" : "delta",
     "--job-language" : "python",
     "--TempDir" : "s3://aws-glue-assets-731732765556-ap-south-1/temporary/"
   },
@@ -32,7 +33,7 @@
   "numberOfWorkers" : 10,
   "workerType" : "G.1X",
   "executionClass" : "STANDARD",
-  "codeGenConfigurationNodes" : "{\"node-1778500222461\":{\"S3CsvSource\":{\"AdditionalOptions\":{\"EnableSamplePath\":false,\"SamplePath\":\"s3://aravind9492ingest/athenaqresults/Unsaved/2026/04/26/104b1842-66f2-4387-950f-c03ced2f2323.csv\"},\"Escaper\":\"\",\"Exclusions\":[],\"Name\":\"Amazon S3\",\"OptimizePerformance\":false,\"Paths\":[\"s3://aravind9492ingest\"],\"QuoteChar\":\"quote\",\"Recurse\":true,\"Separator\":\"comma\",\"WithHeader\":true}}}",
+  "codeGenConfigurationNodes" : "{\"node-1778501066969\":{\"FillMissingValues\":{\"ImputedPath\":\"first_name\",\"Inputs\":[\"node-1778500975548\"],\"Name\":\"Fill Missing Values\"}},\"node-1778500975548\":{\"CatalogDeltaSource\":{\"AdditionalDeltaOptions\":{},\"Database\":\"athena_db\",\"Name\":\"AWS Glue Data Catalog\",\"Table\":\"deltatable\"}}}",
   "sourceControlDetails" : {
     "provider" : "GITHUB",
     "repository" : "gluerepo",
